@@ -9,16 +9,15 @@ worker_rlimit_nofile    20000;
 
 upstream tornado {
     ip_hash;
-    #'<%= node['opsworks']['layers']['mongodb']['instances'].values.map{|instance| "mongodb://#{instance['private_ip']}:27017" }.join(",") %>/mean-todo',
-    server ws1.example.com:10080;
-    server ws2.example.com:10080;
-    server ws3.example.com:10080;
+    <% @tornados.each do |member| -%>
+    server <%= member[:hostname] %>:8888; 
+    %>
 }
 
 server {
 
     listen       80;
-    server_name  ws.example.com;
+    server_name  _;
 
     location / {
 

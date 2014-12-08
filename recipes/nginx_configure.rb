@@ -1,13 +1,14 @@
-#node[:deploy].each do |application, deploy|
-#  template "/etc/nginx/nginx.conf" do
-#    source "nginc.conf.erb"
-#    mode '0644'
-#    owner deploy[:user]
-#    group deploy[:group]
-#    variables(
-#      :replSet => node[:mongodb][:config][:replSet],
-#      :dbUser => deploy[:db_user],
-#      :dbPassword => deploy[:db_password]
-#    )
-#  end
-#end
+tornados = search(:node, "role:tornado")
+Chef::Log.warn("I got Tornados '#{tornados}'")
+
+template "/etc/nginx/sites-available/websockets.conf" do
+  source "websockets.conf.erb"
+  mode '0644'
+  variables(
+    :tornados => tornados
+  )
+end
+
+link "/etc/nginx/sites-enabled/websockets.conf" do
+  to '/etc/nginx/sites-available/websockets.conf'
+end
