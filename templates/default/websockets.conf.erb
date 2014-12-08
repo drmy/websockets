@@ -11,7 +11,7 @@ upstream tornado {
     ip_hash;
     <% @tornados.each do |member| %>
     server <%= member[:private_ip] %>:8888; 
-    %>
+    <% end %>
 }
 
 server {
