@@ -10,7 +10,7 @@ worker_rlimit_nofile    20000;
 upstream tornado {
     ip_hash;
     <% @tornados.each do |member| %>
-    server <%= member[:private_ip] %>:8888; 
+    server <%= member[:private_ip] %>:8181; 
     <% end %>
 }
 
