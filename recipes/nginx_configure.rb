@@ -1,5 +1,4 @@
 tornados = search(:node, "role:tornado")
-Chef::Log.warn("I got Tornados '#{tornados}'")
 
 template "/etc/nginx/sites-available/websockets.conf" do
   source "websockets.conf.erb"
