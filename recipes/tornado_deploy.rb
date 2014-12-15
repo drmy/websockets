@@ -13,7 +13,7 @@ node[:deploy].each do |application, deploy|
   end
 
   execute "run_demo" do
-	command "#{deploy[:deploy_to]}/current/chatdemo.py"
+	command "#{deploy[:deploy_to]}/current/chatdemo.py > #{deploy[:deploy_to]}/current/log/chatdemo.log &"
 	only_if { ::File.exists?("#{deploy[:deploy_to]}/current/chatdemo.py") }
   end
 end
