@@ -8,7 +8,7 @@ upstream tornado {
 server {
 
     listen       80;
-    server_name  _; 
+    server_name  <% @public_ip %>; 
 
     location / {
 
