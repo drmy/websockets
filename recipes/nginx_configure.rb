@@ -5,7 +5,7 @@ template "/etc/nginx/sites-available/websockets.conf" do
   mode '0644'
   variables(
     :tornados => tornados,
-    :public_ip => node[:opsworks][:instance][:ip]
+    :public_ip => node[:opsworks][:ip]
   )
   notifies :reload, "service[nginx]", :immediately
 end
