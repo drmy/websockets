@@ -6,12 +6,13 @@ template "/etc/nginx/nginx.conf" do
   notifies :reload, "service[nginx]", :immediately
 end
 
+Chef::Log.warn("Public IP is '#{node['opsworks']['instance']['ip']}', full JSON '#{node['opsworks']}'")
 template "/etc/nginx/sites-available/websockets.conf" do
   source "websockets.conf.erb"
   mode '0644'
   variables(
     :sockets => sockets,
-    :public_ip => node[:opsworks][:ec2][:public_ipv4]
+    :public_ip => node[:opsworks][:instance][:ip]
   )
   notifies :reload, "service[nginx]", :immediately
 end
