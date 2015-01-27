@@ -1,4 +1,4 @@
 websockets
 ====
 
-OpsWorks Cookbooks for WebSockets with Nginx and TornadoWeb
+OpsWorks Cookbooks for WebSockets with Nginx and Socket.io

@@ -1,10 +1,16 @@
-tornados = search(:node, "role:tornado")
+sockets = search(:node, "role:nodejs-app")
+
+template "/etc/nginx/nginx.conf" do
+  source "nginx.conf.erb"
+  mode '0644'
+  notifies :reload, "service[nginx]", :immediately
+end
 
 template "/etc/nginx/sites-available/websockets.conf" do
   source "websockets.conf.erb"
   mode '0644'
   variables(
-    :tornados => tornados,
+    :sockets => sockets,
     :public_ip => node[:opsworks][:ip]
   )
   notifies :reload, "service[nginx]", :immediately
